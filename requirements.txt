@@ -1,1 +1,15 @@
 requests
+import requests
+
+API_KEY = "aa48cf6e738308576fcb52d78d515e73"
+BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
+
+city = "London"
+url = f"{BASE_URL}?q={city}&appid={API_KEY}&units=metric"
+
+response = requests.get(url)
+if response.status_code == 200:
+    data = response.json()
+    print(f"Weather in {data['name']}: {data['weather'][0]['description']}, {data['main']['temp']}°C")
+else:
+    print(f"Error: {response.json().get('message', 'Unknown error')}")
